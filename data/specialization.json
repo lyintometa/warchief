@@ -1,0 +1,382 @@
+{
+  "0": {
+    "identifier": "Death_Knight_Blood",
+    "playerClass": 0,
+    "role": 0,
+    "emoji": 17,
+    "description": {
+      "enGB": "Blood",
+      "deDE": "Blut"
+    }
+  },
+  "1": {
+    "identifier": "Death_Knight_Frost",
+    "playerClass": 0,
+    "role": 2,
+    "emoji": 18,
+    "description": {
+      "enGB": "Frost",
+      "deDE": "Frost"
+    }
+  },
+  "2": {
+    "identifier": "Death_Knight_Unholy",
+    "playerClass": 0,
+    "role": 2,
+    "emoji": 19,
+    "description": {
+      "enGB": "Unholy",
+      "deDE": "Unheilig"
+    }
+  },
+  "3": {
+    "identifier": "Demon_Hunter_Havoc",
+    "playerClass": 1,
+    "role": 2,
+    "emoji": 20,
+    "description": {
+      "enGB": "Havoc",
+      "deDE": "Verwüstung"
+    }
+  },
+  "4": {
+    "identifier": "Demon_Hunter_Vengeance",
+    "playerClass": 1,
+    "role": 0,
+    "emoji": 21,
+    "description": {
+      "enGB": "Vengeance",
+      "deDE": "Rachsucht"
+    }
+  },
+  "5": {
+    "identifier": "Druid_Balance",
+    "playerClass": 2,
+    "role": 3,
+    "emoji": 22,
+    "description": {
+      "enGB": "Balance",
+      "deDE": "Gleichgewicht"
+    }
+  },
+  "6": {
+    "identifier": "Druid_Feral",
+    "playerClass": 2,
+    "role": 2,
+    "emoji": 23,
+    "description": {
+      "enGB": "Feral",
+      "deDE": "Wildheit"
+    }
+  },
+  "7": {
+    "identifier": "Druid_Guardian",
+    "playerClass": 2,
+    "role": 0,
+    "emoji": 24,
+    "description": {
+      "enGB": "Guardian",
+      "deDE": "Wächter"
+    }
+  },
+  "8": {
+    "identifier": "Druid_Restoration",
+    "playerClass": 2,
+    "role": 1,
+    "emoji": 25,
+    "description": {
+      "enGB": "Restoration",
+      "deDE": "Wiederherstellung"
+    }
+  },
+  "9": {
+    "identifier": "Evoker_Devastation",
+    "playerClass": 3,
+    "role": 3,
+    "emoji": 26,
+    "description": {
+      "enGB": "Devastation",
+      "deDE": "Verheerung"
+    }
+  },
+  "10": {
+    "identifier": "Evoker_Preservation",
+    "playerClass": 3,
+    "role": 1,
+    "emoji": 27,
+    "description": {
+      "enGB": "Preservation",
+      "deDE": "Bewahrung"
+    }
+  },
+  "11": {
+    "identifier": "Hunter_Beast_Mastery",
+    "playerClass": 4,
+    "role": 3,
+    "emoji": 28,
+    "description": {
+      "enGB": "Beast Mastery",
+      "deDE": "Tierherrschaft"
+    }
+  },
+  "12": {
+    "identifier": "Hunter_Marksmanship",
+    "playerClass": 4,
+    "role": 3,
+    "emoji": 29,
+    "description": {
+      "enGB": "Marksmanship",
+      "deDE": "Treffsicherheit"
+    }
+  },
+  "13": {
+    "identifier": "Hunter_Survival",
+    "playerClass": 4,
+    "role": 2,
+    "emoji": 30,
+    "description": {
+      "enGB": "Survival",
+      "deDE": "Überleben"
+    }
+  },
+  "14": {
+    "identifier": "Mage_Arcane",
+    "playerClass": 5,
+    "role": 3,
+    "emoji": 31,
+    "description": {
+      "enGB": "Arcane",
+      "deDE": "Arkan"
+    }
+  },
+  "15": {
+    "identifier": "Mage_Fire",
+    "playerClass": 5,
+    "role": 3,
+    "emoji": 32,
+    "description": {
+      "enGB": "Fire",
+      "deDE": "Feuer"
+    }
+  },
+  "16": {
+    "identifier": "Mage_Frost",
+    "playerClass": 5,
+    "role": 3,
+    "emoji": 33,
+    "description": {
+      "enGB": "Frost",
+      "deDE": "Frost"
+    }
+  },
+  "17": {
+    "identifier": "Monk_Brewmaster",
+    "playerClass": 6,
+    "role": 0,
+    "emoji": 34,
+    "description": {
+      "enGB": "Brewmaster",
+      "deDE": "Braumeister"
+    }
+  },
+  "18": {
+    "identifier": "Monk_Mistweaver",
+    "playerClass": 6,
+    "role": 1,
+    "emoji": 35,
+    "description": {
+      "enGB": "Mistweaver",
+      "deDE": "Nebelwirker"
+    }
+  },
+  "19": {
+    "identifier": "Monk_Windwalker",
+    "playerClass": 6,
+    "role": 2,
+    "emoji": 36,
+    "description": {
+      "enGB": "Windwalker",
+      "deDE": "Windläufer"
+    }
+  },
+  "20": {
+    "identifier": "Paladin_Holy",
+    "playerClass": 7,
+    "role": 1,
+    "emoji": 37,
+    "description": {
+      "enGB": "Holy",
+      "deDE": "Heilig"
+    }
+  },
+  "21": {
+    "identifier": "Paladin_Protection",
+    "playerClass": 7,
+    "role": 0,
+    "emoji": 38,
+    "description": {
+      "enGB": "Protection",
+      "deDE": "Schutz"
+    }
+  },
+  "22": {
+    "identifier": "Paladin_Retribution",
+    "playerClass": 7,
+    "role": 2,
+    "emoji": 39,
+    "description": {
+      "enGB": "Retribution",
+      "deDE": "Vergeltung"
+    }
+  },
+  "23": {
+    "identifier": "Priest_Discipline",
+    "playerClass": 8,
+    "role": 1,
+    "emoji": 40,
+    "description": {
+      "enGB": "Discipline",
+      "deDE": "Disziplin"
+    }
+  },
+  "24": {
+    "identifier": "Priest_Holy",
+    "playerClass": 8,
+    "role": 1,
+    "emoji": 41,
+    "description": {
+      "enGB": "Holy",
+      "deDE": "Heilig"
+    }
+  },
+  "25": {
+    "identifier": "Priest_Shadow",
+    "playerClass": 8,
+    "role": 3,
+    "emoji": 42,
+    "description": {
+      "enGB": "Shadow",
+      "deDE": "Schatten"
+    }
+  },
+  "266": {
+    "identifier": "Rogue_Assassination",
+    "playerClass": 9,
+    "role": 2,
+    "emoji": 43,
+    "description": {
+      "enGB": "Assassination",
+      "deDE": "Meucheln"
+    }
+  },
+  "27": {
+    "identifier": "Rogue_Outlaw",
+    "playerClass": 9,
+    "role": 2,
+    "emoji": 44,
+    "description": {
+      "enGB": "Outlaw",
+      "deDE": "Gesetzlosigkeit"
+    }
+  },
+  "28": {
+    "identifier": "Rogue_Subtlety",
+    "playerClass": 9,
+    "role": 2,
+    "emoji": 45,
+    "description": {
+      "enGB": "Subtlety",
+      "deDE": "Täuschung"
+    }
+  },
+  "29": {
+    "identifier": "Shaman_Elemental",
+    "playerClass": 10,
+    "role": 3,
+    "emoji": 46,
+    "description": {
+      "enGB": "Elemental",
+      "deDE": "Elementar"
+    }
+  },
+  "30": {
+    "identifier": "Shaman_Enhancement",
+    "playerClass": 10,
+    "role": 2,
+    "emoji": 47,
+    "description": {
+      "enGB": "Enhancement",
+      "deDE": "Verstärkung"
+    }
+  },
+  "31": {
+    "identifier": "Shaman_Restoration",
+    "playerClass": 10,
+    "role": 1,
+    "emoji": 48,
+    "description": {
+      "enGB": "Restoration",
+      "deDE": "Wiederherstellung"
+    }
+  },
+  "32": {
+    "identifier": "Warlock_Affliction",
+    "playerClass": 11,
+    "role": 3,
+    "emoji": 49,
+    "description": {
+      "enGB": "Affliction",
+      "deDE": "Gebrechen"
+    }
+  },
+  "33": {
+    "identifier": "Warlock_Demonology",
+    "playerClass": 11,
+    "role": 3,
+    "emoji": 50,
+    "description": {
+      "enGB": "Demonology",
+      "deDE": "Dämonologie"
+    }
+  },
+  "34": {
+    "identifier": "Warlock_Destruction",
+    "playerClass": 11,
+    "role": 3,
+    "emoji": 51,
+    "description": {
+      "enGB": "Destruction",
+      "deDE": "Zerstörung"
+    }
+  },
+  "35": {
+    "identifier": "Warrior_Arms",
+    "playerClass": 12,
+    "role": 2,
+    "emoji": 52,
+    "description": {
+      "enGB": "Arms",
+      "deDE": "Waffen"
+    }
+  },
+  "36": {
+    "identifier": "Warrior_Fury",
+    "playerClass": 12,
+    "role": 2,
+    "emoji": 53,
+    "description": {
+      "enGB": "Fury",
+      "deDE": "Furor"
+    }
+  },
+  "37": {
+    "identifier": "Warrior_Protection",
+    "playerClass": 12,
+    "role": 0,
+    "emoji": 54,
+    "description": {
+      "enGB": "Protection",
+      "deDE": "Schutz"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "0": {
+    "identifier": "Tank",
+    "emoji": 1,
+    "displayIndex": 0,
+    "description": {
+      "enGB": "Tank",
+      "deDE": "Schutz"
+    }
+  },
+  "1": {
+    "identifier": "Heal",
+    "emoji": 2,
+    "displayIndex": 1,
+    "description": {
+      "enGB": "Heal",
+      "deDE": "Heilung"
+    }
+  },
+  "2": {
+    "identifier": "Melee_Damage_Dealer",
+    "emoji": 3,
+    "displayIndex": 2,
+    "description": {
+      "enGB": "Damage Dealer Melee",
+      "deDE": "Schaden Nahkampf"
+    }
+  },
+  "3": {
+    "identifier": "Ranged_Damage_Dealer",
+    "emoji": 3,
+    "displayIndex": 2,
+    "description": {
+      "enGB": "Damage Dealer Ranged",
+      "deDE": "Schaden Fernkampf"
+    }
+  }
+}

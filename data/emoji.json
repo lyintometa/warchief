@@ -1,0 +1,222 @@
+{
+  "0": {
+    "name": "Question_Mark",
+    "discordId": "1007969824015646742"
+  },
+  "1": {
+    "name": "Tank",
+    "discordId": "1005486422351945768"
+  },
+  "2": {
+    "name": "Heal",
+    "discordId": "1005486394380124220"
+  },
+  "3": {
+    "name": "Damage_Dealer",
+    "discordId": "1005486365678501889"
+  },
+  "4": {
+    "name": "Death_Knight",
+    "discordId": "986973060865355866"
+  },
+  "5": {
+    "name": "Demon_Hunter",
+    "discordId": "986973062278832168"
+  },
+  "6": {
+    "name": "Druid",
+    "discordId": "986994504341000242"
+  },
+  "7": {
+    "name": "Evoker",
+    "discordId": "987001932323368970"
+  },
+  "8": {
+    "name": "Hunter",
+    "discordId": "987004819124391956"
+  },
+  "9": {
+    "name": "Mage",
+    "discordId": "987007099886252032"
+  },
+  "10": {
+    "name": "Monk",
+    "discordId": "987030574344593478"
+  },
+  "11": {
+    "name": "Paladin",
+    "discordId": "987034014173003796"
+  },
+  "12": {
+    "name": "Priest",
+    "discordId": "987045213065330749"
+  },
+  "13": {
+    "name": "Rogue",
+    "discordId": "987047818344693861"
+  },
+  "14": {
+    "name": "Shaman",
+    "discordId": "987059513737773086"
+  },
+  "15": {
+    "name": "Warlock",
+    "discordId": "987095721310306427"
+  },
+  "16": {
+    "name": "Warrior",
+    "discordId": "987097540363169834"
+  },
+  "17": {
+    "name": "Death_Knight_Blood",
+    "discordId": "986973192042188800"
+  },
+  "18": {
+    "name": "Death_Knight_Frost",
+    "discordId": "986973193409556560"
+  },
+  "19": {
+    "name": "Death_Knight_Unholy",
+    "discordId": "986973194625875968"
+  },
+  "20": {
+    "name": "Demon_Hunter_Havoc",
+    "discordId": "986973195280207883"
+  },
+  "21": {
+    "name": "Demon_Hunter_Vengeance",
+    "discordId": "986973196643360791"
+  },
+  "22": {
+    "name": "Druid_Balance",
+    "discordId": "986994611455135764"
+  },
+  "23": {
+    "name": "Druid_Feral",
+    "discordId": "986994612914778132"
+  },
+  "24": {
+    "name": "Druid_Guardian",
+    "discordId": "986994614277914854"
+  },
+  "25": {
+    "name": "Druid_Restoration",
+    "discordId": "986994615691391026"
+  },
+  "26": {
+    "name": "Evoker_Devastation",
+    "discordId": "987002007162335243"
+  },
+  "27": {
+    "name": "Evoker_Preservation",
+    "discordId": "987002008881999902"
+  },
+  "28": {
+    "name": "Hunter_Beast_Mastery",
+    "discordId": "987004884400373861"
+  },
+  "29": {
+    "name": "Hunter_Marksmanship",
+    "discordId": "987004885587353600"
+  },
+  "30": {
+    "name": "Hunter_Survival",
+    "discordId": "987004886677848074"
+  },
+  "31": {
+    "name": "Mage_Arcane",
+    "discordId": "987007169482358805"
+  },
+  "32": {
+    "name": "Mage_Fire",
+    "discordId": "987007171030040636"
+  },
+  "33": {
+    "name": "Mage_Frost",
+    "discordId": "987007172204441622"
+  },
+  "34": {
+    "name": "Monk_Brewmaster",
+    "discordId": "987030671493050418"
+  },
+  "35": {
+    "name": "Monk_Mistweaver",
+    "discordId": "987030672814243850"
+  },
+  "36": {
+    "name": "Monk_Windwalker",
+    "discordId": "987030674013819001"
+  },
+  "37": {
+    "name": "Paladin_Holy",
+    "discordId": "987034094481334352"
+  },
+  "38": {
+    "name": "Paladin_Protection",
+    "discordId": "987034095936733264"
+  },
+  "39": {
+    "name": "Paladin_Retribution",
+    "discordId": "987034096989515808"
+  },
+  "40": {
+    "name": "Priest_Discipline",
+    "discordId": "987045323048382515"
+  },
+  "41": {
+    "name": "Priest_Holy",
+    "discordId": "987045324583481394"
+  },
+  "42": {
+    "name": "Priest_Shadow",
+    "discordId": "987045325959209031"
+  },
+  "43": {
+    "name": "Rogue_Assassination",
+    "discordId": "987047894534225970"
+  },
+  "44": {
+    "name": "Rogue_Outlaw",
+    "discordId": "987047895284981771"
+  },
+  "45": {
+    "name": "Rogue_Subtlety",
+    "discordId": "987047896589426749"
+  },
+  "46": {
+    "name": "Shaman_Elemental",
+    "discordId": "987059620499558400"
+  },
+  "47": {
+    "name": "Shaman_Enhancement",
+    "discordId": "987059621569110096"
+  },
+  "48": {
+    "name": "Shaman_Restoration",
+    "discordId": "987059622647062528"
+  },
+  "49": {
+    "name": "Warlock_Affliction",
+    "discordId": "987095946745753651"
+  },
+  "50": {
+    "name": "Warlock_Demonology",
+    "discordId": "987095947983089674"
+  },
+  "51": {
+    "name": "Warlock_Destruction",
+    "discordId": "987095949069402182"
+  },
+  "52": {
+    "name": "Warrior_Arms",
+    "discordId": "987097625885020180"
+  },
+  "53": {
+    "name": "Warrior_Fury",
+    "discordId": "987097627063615488"
+  },
+  "54": {
+    "name": "Warrior_Protection",
+    "discordId": "987097628204474408"
+  }
+}
