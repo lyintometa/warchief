@@ -1,12 +1,13 @@
 import fs from 'fs'
+import * as dotenv from 'dotenv'
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9"
-import { clientId, token } from './configuration/configuration.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+dotenv.config()
 const global = false;
 const commands = []
 const commandFiles = fs.readdirSync(path.resolve(__dirname, './commands')).filter(file => file.endsWith('.js'))
@@ -17,10 +18,10 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({version: '9'}).setToken(token)
+const rest = new REST({version: '9'}).setToken(process.env.DJS_TOKEN)
 
 if (global){
-    rest.put(Routes.applicationCommands(clientId), { body: []})
+    rest.put(Routes.applicationCommands(process.env.DJS_CLIENT_ID), { body: []})
         .then(() => console.log('Successfully registered application commands.'))
         .catch(console.error);
 } else {

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageActionRow, MessageButton, MessageSelectMenu } from 'discord.js'
+import { getDefaultOption, setDefaultOption } from './util/util.js'
 import service from '../service/playerClassService.js'
 
 export default {
@@ -11,7 +12,7 @@ export default {
       new MessageSelectMenu()
         .setCustomId('class-select')
         .setPlaceholder('Klasse')
-        .addOptions(service.getClassSelectOptions())
+        .addOptions(service.getClassSelectOptions(interaction.guildId))
     )
     await interaction.reply({
       content: 'Wähle deine Klasse:',
@@ -29,7 +30,7 @@ export default {
           new MessageSelectMenu()
             .setCustomId('spec-select')
             .setPlaceholder('Spezialisierung')
-            .addOptions(service.getSpecSelectOptions(interaction.values[0]))
+            .addOptions(service.getSpecSelectOptions(interaction.guildId, interaction.values[0]))
         )
         await interaction.update({
           content: 'Wähle deine Spezialisierung:',
@@ -62,23 +63,16 @@ export default {
     const specSelectRow = interaction.message.components[1]
     const playerClassId = getDefaultOption(classSelectRow.components[0]).value
     const specializationId = getDefaultOption(specSelectRow.components[0]).value
-    const { playerClass, specialization } = service.createOrUpdate(
+    const { playerClassDesc, playerClassEmoji, specDesc, specEmoji } = service.createOrUpdate(
       interaction.guildId,
       interaction.user,
       playerClassId,
       specializationId
     )
     await interaction.update({
-      content: `Deine Auswahl: \n${playerClass.emoji} ${playerClass.description} - ${specialization.emoji} ${specialization.description}
+      content: `Deine Auswahl: \n${playerClassEmoji} ${playerClassDesc} - ${specEmoji} ${specDesc}
             \nDu kannst deine Auswahl jederzeit ändern, benutze dazu wieder den Befehl '/klasse'!`,
       components: []
     })
   }
 }
-
-const getDefaultOption = component => component.options.find(_ => _.default)
-
-const setDefaultOption = (component, defaultValue) =>
-  component.options.forEach(_ => {
-    _.default = _.value == defaultValue
-  })

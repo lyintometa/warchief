@@ -1,5 +1,5 @@
 import { EmbedBuilder } from '@discordjs/builders'
-import data from '../dataAccess/dataAccess.js'
+import { languages, specializations, roles } from '../dataAccess/dataAccess.js'
 import DataAccess from './dataAccess.js'
 
 const prefix = 'setting-data'
@@ -14,15 +14,20 @@ export default class SettingsAccess {
     this.#dataAccess = new DataAccess(prefix)
     this.#data = await this.#dataAccess.read(guild)
     if (!this.#data.tables) this.#data.tables = {}
+    if (!this.#data.language) this.#data.language = languages[0].locale
     this.playerData = playerData
     this.messagesTable = await this.#aquireMessages(guild)
   }
 
   getTableData = () => this.#data.tables
 
+  get language() {
+    return this.#data.language
+  }
+
   createTable = channel => {
     if (this.#data.tables[channel.id]) return
-    return this.#constructTableEmbed().data    
+    return this.#constructTableEmbed().data
   }
 
   addTableMessage = async message => {
@@ -31,9 +36,14 @@ export default class SettingsAccess {
     await this.#dataAccess.write(this.#data)
   }
 
+  updateLanguage = async language => {
+    this.#data.language = language.locale
+    await this.#dataAccess.write(this.#data)
+  }
+
   updatePlayerData = async playerData => {
     this.playerData = playerData
-    var table = this.#constructTableEmbed().data    
+    var table = this.#constructTableEmbed().data
     await Promise.all(this.messagesTable.map(_ => _.edit({ embeds: [table] })))
   }
 
@@ -59,28 +69,30 @@ export default class SettingsAccess {
     ).filter(_ => _ !== undefined)
 
   #constructTableEmbed = () => new EmbedBuilder()
-      .setColor(0x0099FF)
-      .setTitle('Raidkader')
-      .setDescription(this.#constructTable() + '\u200b')
-      .addFields({ name: 'Befehle', value: "`/klasse` - Füg deine Klasse hinzu\n`/klassen_entfernen` - Lösche deine Klasse" })
+    .setColor(0x0099FF)
+    .setTitle('Raidkader')
+    .setDescription(this.#constructTable() + '\u200b'+ '\u200b')
+    .addFields({ name: 'Befehle', value: "`/klasse` - Füg deine Klasse hinzu\n`/klasse_entfernen` - Lösche deine Klasse" })
 
-  #constructTable = () => Object.keys(this.playerData).sort(this.#byRole).map(playerId => {
-      const playerSpec = data.specializations[this.playerData[playerId].specialization]
-      const playerClass = playerSpec.playerClass
-      const playerRole = playerSpec.role
-      return `${playerRole.emoji} ${playerClass.emoji}${playerSpec.emoji} ${this.playerData[playerId].name}\n`
-    }).join('\n')
+  #constructTable = () => [...Object.keys(this.playerData).sort(this.#byRole).map(playerId => {
+    const playerSpec = specializations[this.playerData[playerId].specialization]
+    const playerClass = playerSpec.playerClass
+    const playerRole = playerSpec.role
+    return `${playerRole.emoji} ${playerClass.emoji}${playerSpec.emoji} ${this.playerData[playerId].name}`
+  }), '', `${roles[0].emoji} ${this.#countRole(0)}  ${roles[1].emoji} ${this.#countRole(1)}  ${roles[2].emoji} ${this.#countRole(2) + this.#countRole(3)}`, ''].join('\n')
+
+  #countRole = roleId => Object.keys(this.playerData).filter(playerId => specializations[this.playerData[playerId].specialization].role.id === roleId).length
 
   #byRole = (a, b) => {
-    const playerSpecA = data.specializations[this.playerData[a].specialization]
-    const playerSpecB = data.specializations[this.playerData[b].specialization]
+    const playerSpecA = specializations[this.playerData[a].specialization]
+    const playerSpecB = specializations[this.playerData[b].specialization]
     const classA = playerSpecA.playerClass
     const classB = playerSpecB.playerClass
-    const roleA = classA.getSpec(this.playerData[a].specialization).role
-    const roleB = classB.getSpec(this.playerData[b].specialization).role
+    const roleA = playerSpecA.role
+    const roleB = playerSpecB.role
     if (roleA.displayIndex != roleB.displayIndex) return roleA.displayIndex - roleB.displayIndex;
     if (classA.id != classB.id) return classA.id - classB.id;
     var playerNamesSorted = [this.playerData[a].name, this.playerData[b].name].sort()
-    return playerNamesSorted.indexOf(this.playerData[a].name) - playerNamesSorted.indexOf(this.playerData[b].name);      
+    return playerNamesSorted.indexOf(this.playerData[a].name) - playerNamesSorted.indexOf(this.playerData[b].name);
   }
 }

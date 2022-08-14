@@ -1,0 +1,12 @@
+{
+  "0": {
+    "locale": "en_GB",
+    "description": "English (GB)",
+    "emoji": ["0x1F1EC", "0x1F1E7"]
+  },
+  "1": {
+    "locale": "de_DE",
+    "description": "Deutsch",
+    "emoji": ["0x1F1E9", "0x1F1EA"]
+  }
+}

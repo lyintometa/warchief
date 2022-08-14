@@ -3,104 +3,104 @@
     "identifier": "Death_Knight",
     "emoji": 4,
     "description": {
-      "enGB": "Death Knight",
-      "deDE": "Todesritter"
+      "en_GB": "Death Knight",
+      "de_DE": "Todesritter"
     }
   },
   "1": {
     "identifier": "Demon_Hunter",
     "emoji": 5,
     "description": {
-      "enGB": "Demon Hunter",
-      "deDE": "Dämonenjäger"
+      "en_GB": "Demon Hunter",
+      "de_DE": "Dämonenjäger"
     }
   },
   "2": {
     "identifier": "Druid",
     "emoji": 6,
     "description": {
-      "enGB": "Druid",
-      "deDE": "Druide"
+      "en_GB": "Druid",
+      "de_DE": "Druide"
     }
   },
   "3": {
     "identifier": "Evoker",
     "emoji": 7,
     "description": {
-      "enGB": "Evoker",
-      "deDE": "Rufer der Dracthyr"
+      "en_GB": "Evoker",
+      "de_DE": "Rufer der Dracthyr"
     }
   },
   "4": {
     "identifier": "Hunter",
     "emoji": 8,
     "description": {
-      "enGB": "Hunter",
-      "deDE": "Jäger"
+      "en_GB": "Hunter",
+      "de_DE": "Jäger"
     }
   },
   "5": {
     "identifier": "Mage",
     "emoji": 9,
     "description": {
-      "enGB": "Mage",
-      "deDE": "Magier"
+      "en_GB": "Mage",
+      "de_DE": "Magier"
     }
   },
   "6": {
     "identifier": "Monk",
     "emoji": 10,
     "description": {
-      "enGB": "Monk",
-      "deDE": "Mönch"
+      "en_GB": "Monk",
+      "de_DE": "Mönch"
     }
   },
   "7": {
     "identifier": "Paladin",
     "emoji": 11,
     "description": {
-      "enGB": "Paladin",
-      "deDE": "Paladin"
+      "en_GB": "Paladin",
+      "de_DE": "Paladin"
     }
   },
   "8": {
     "identifier": "Priest",
     "emoji": 12,
     "description": {
-      "enGB": "Priest",
-      "deDE": "Priester"
+      "en_GB": "Priest",
+      "de_DE": "Priester"
     }
   },
   "9": {
     "identifier": "Rogue",
     "emoji": 13,
     "description": {
-      "enGB": "Rogue",
-      "deDE": "Schurke"
+      "en_GB": "Rogue",
+      "de_DE": "Schurke"
     }
   },
   "10": {
     "identifier": "Shaman",
     "emoji": 14,
     "description": {
-      "enGB": "Shaman",
-      "deDE": "Schamane"
+      "en_GB": "Shaman",
+      "de_DE": "Schamane"
     }
   },
   "11": {
     "identifier": "Warlock",
     "emoji": 15,
     "description": {
-      "enGB": "Warlock",
-      "deDE": "Hexenmeister"
+      "en_GB": "Warlock",
+      "de_DE": "Hexenmeister"
     }
   },
   "12": {
     "identifier": "Warrior",
     "emoji": 16,
     "description": {
-      "enGB": "Warrior",
-      "deDE": "Krieger"
+      "en_GB": "Warrior",
+      "de_DE": "Krieger"
     }
   }
 }

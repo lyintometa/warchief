@@ -12,6 +12,7 @@ class DataAccessService{
     }
 
     initGuild = async guild => {
+        //console.log(guild)
         const playerAccess = new PlayerAccess()
         await playerAccess.init(guild)
         this.playerAccesses[guild.id] = playerAccess

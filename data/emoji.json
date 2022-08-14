@@ -218,5 +218,11 @@
   "54": {
     "name": "Warrior_Protection",
     "discordId": "987097628204474408"
+  },
+  "55": {
+    "name": "flag_gb"
+  },
+  "56": {
+    "name": "flag_de"
   }
 }

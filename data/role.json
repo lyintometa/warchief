@@ -4,8 +4,8 @@
     "emoji": 1,
     "displayIndex": 0,
     "description": {
-      "enGB": "Tank",
-      "deDE": "Schutz"
+      "en_GB": "Tank",
+      "de_DE": "Schutz"
     }
   },
   "1": {
@@ -13,8 +13,8 @@
     "emoji": 2,
     "displayIndex": 1,
     "description": {
-      "enGB": "Heal",
-      "deDE": "Heilung"
+      "en_GB": "Heal",
+      "de_DE": "Heilung"
     }
   },
   "2": {
@@ -22,8 +22,8 @@
     "emoji": 3,
     "displayIndex": 2,
     "description": {
-      "enGB": "Damage Dealer Melee",
-      "deDE": "Schaden Nahkampf"
+      "en_GB": "Damage Dealer Melee",
+      "de_DE": "Schaden Nahkampf"
     }
   },
   "3": {
@@ -31,8 +31,8 @@
     "emoji": 3,
     "displayIndex": 2,
     "description": {
-      "enGB": "Damage Dealer Ranged",
-      "deDE": "Schaden Fernkampf"
+      "en_GB": "Damage Dealer Ranged",
+      "de_DE": "Schaden Fernkampf"
     }
   }
 }

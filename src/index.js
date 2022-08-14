@@ -70,6 +70,15 @@ client.on("messageReactionAdd", async function(messageReaction, user) {
     // console.log(user)
 });
 
+client.on('messageCreate', async message => {
+    try {
+        console.log(message.content.codePointAt(0).toString(16))
+        
+    } catch (error) {
+        
+    }
+})
+
 client.on('interactionCreate', async interaction => {
     let command = client.commands.get(interaction.commandName); // error source?
 	command = command ?? client.commands.get(interaction.message.interaction.commandName);
