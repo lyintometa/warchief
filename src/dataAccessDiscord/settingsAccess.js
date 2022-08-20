@@ -1,5 +1,4 @@
-import { EmbedBuilder } from '@discordjs/builders'
-import { languages, specializations, roles } from '../dataAccess/dataAccess.js'
+import { languages } from '../dataAccess/dataAccess.js'
 import DataAccess from './dataAccess.js'
 
 const prefix = 'setting-data'
@@ -7,31 +6,32 @@ const prefix = 'setting-data'
 export default class SettingsAccess {
   #dataAccess
   #data
-  playerData
-  messagesTable = []
+  #messagesTable = []
 
-  init = async (guild, playerData) => {
+  init = async guild => {
     this.#dataAccess = new DataAccess(prefix)
     this.#data = await this.#dataAccess.read(guild)
     if (!this.#data.tables) this.#data.tables = {}
     if (!this.#data.language) this.#data.language = languages[0].locale
-    this.playerData = playerData
-    this.messagesTable = await this.#aquireMessages(guild)
+    this.#messagesTable = await this.#aquireMessages(guild)
   }
 
   getTableData = () => this.#data.tables
+
+  get tables() {
+    return this.#data.tables
+  }
 
   get language() {
     return this.#data.language
   }
 
-  createTable = channel => {
-    if (this.#data.tables[channel.id]) return
-    return this.#constructTableEmbed().data
+  get messagesTable() {
+    return this.#messagesTable
   }
 
   addTableMessage = async message => {
-    this.messagesTable.push(message)
+    this.#messagesTable.push(message)
     this.#data.tables[message.channelId] = message.id
     await this.#dataAccess.write(this.#data)
   }
@@ -39,12 +39,6 @@ export default class SettingsAccess {
   updateLanguage = async language => {
     this.#data.language = language.locale
     await this.#dataAccess.write(this.#data)
-  }
-
-  updatePlayerData = async playerData => {
-    this.playerData = playerData
-    var table = this.#constructTableEmbed().data
-    await Promise.all(this.messagesTable.map(_ => _.edit({ embeds: [table] })))
   }
 
   deleteTable = async channelId => {
@@ -67,32 +61,4 @@ export default class SettingsAccess {
         })
       )
     ).filter(_ => _ !== undefined)
-
-  #constructTableEmbed = () => new EmbedBuilder()
-    .setColor(0x0099FF)
-    .setTitle('Raidkader')
-    .setDescription(this.#constructTable() + '\u200b'+ '\u200b')
-    .addFields({ name: 'Befehle', value: "`/klasse` - Füg deine Klasse hinzu\n`/klasse_entfernen` - Lösche deine Klasse" })
-
-  #constructTable = () => [...Object.keys(this.playerData).sort(this.#byRole).map(playerId => {
-    const playerSpec = specializations[this.playerData[playerId].specialization]
-    const playerClass = playerSpec.playerClass
-    const playerRole = playerSpec.role
-    return `${playerRole.emoji} ${playerClass.emoji}${playerSpec.emoji} ${this.playerData[playerId].name}`
-  }), '', `${roles[0].emoji} ${this.#countRole(0)}  ${roles[1].emoji} ${this.#countRole(1)}  ${roles[2].emoji} ${this.#countRole(2) + this.#countRole(3)}`, ''].join('\n')
-
-  #countRole = roleId => Object.keys(this.playerData).filter(playerId => specializations[this.playerData[playerId].specialization].role.id === roleId).length
-
-  #byRole = (a, b) => {
-    const playerSpecA = specializations[this.playerData[a].specialization]
-    const playerSpecB = specializations[this.playerData[b].specialization]
-    const classA = playerSpecA.playerClass
-    const classB = playerSpecB.playerClass
-    const roleA = playerSpecA.role
-    const roleB = playerSpecB.role
-    if (roleA.displayIndex != roleB.displayIndex) return roleA.displayIndex - roleB.displayIndex;
-    if (classA.id != classB.id) return classA.id - classB.id;
-    var playerNamesSorted = [this.playerData[a].name, this.playerData[b].name].sort()
-    return playerNamesSorted.indexOf(this.playerData[a].name) - playerNamesSorted.indexOf(this.playerData[b].name);
-  }
 }

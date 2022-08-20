@@ -2,11 +2,13 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-const languageDataFile = 'language.json'
+const commandDataFile = 'command.json'
 const emojiDataFile = 'emoji.json'
+const languageDataFile = 'language.json'
 const playerClassDataFile = 'player_class.json'
 const roleDataFile = 'role.json'
 const specializationDataFile = 'specialization.json'
+const translationDataFile = 'translation.json'
 
 const dataDirectory = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -17,11 +19,13 @@ const dataDirectory = path.resolve(
 const readJsonFromFile = fileName =>
   JSON.parse(fs.readFileSync(path.resolve(dataDirectory, fileName)))
 
-const languages = readJsonFromFile(languageDataFile)
+const commands = readJsonFromFile(commandDataFile)
 const emojis = readJsonFromFile(emojiDataFile)
+const languages = readJsonFromFile(languageDataFile)
 const playerClasses = readJsonFromFile(playerClassDataFile)
 const roles = readJsonFromFile(roleDataFile)
 const specializations = readJsonFromFile(specializationDataFile)
+const translations = readJsonFromFile(translationDataFile)
 
 Object.keys(languages).forEach(languageId => {
   const language = languages[languageId]
@@ -60,5 +64,12 @@ Object.keys(playerClasses).forEach(playerClassId => {
     .map(specId => ({ ...specializations[specId], id: specId }))
 })
 
-export { languages, emojis, playerClasses, specializations, roles }
-export default { languages, emojis, playerClasses, specializations, roles }
+export {
+  commands,
+  emojis,
+  languages,
+  playerClasses,
+  specializations,
+  roles,
+  translations
+}

@@ -1,0 +1,46 @@
+{
+  "en_GB": {
+    "class_remove": {
+      "name": "class_remove",
+      "description": "Remove your class"
+    },
+    "class_select": {
+      "name": "class_select",
+      "description": "Pick your class"
+    },
+    "help": {
+      "name": "help",
+      "description": "Show a command overview"
+    },
+    "language": {
+      "name": "language",
+      "description": "Change the bot's language"
+    },
+    "raid_table": {
+      "name": "raid_table",
+      "description": "Create a table showing all raid members"
+    }
+  },
+  "de_DE": {
+    "class_remove": {
+      "name": "klasse_entfernen",
+      "description": "Entferne deine Klasse"
+    },
+    "class_select": {
+      "name": "klasse_wählen",
+      "description": "Wähle deine Klasse"
+    },
+    "help": {
+      "name": "hilfe",
+      "description": "Zeig eine Übersicht der Befehle"
+    },
+    "language": {
+      "name": "language",
+      "description": "Ändere die Sprache des Bots"
+    },
+    "raid_table": {
+      "name": "raid_tabelle",
+      "description": "Erstelle eine Übersicht über die Raid Mitglieder"
+    }
+  }
+}

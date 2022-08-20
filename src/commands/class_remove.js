@@ -1,29 +1,31 @@
+import service from '../service/playerClassService.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageActionRow, MessageButton } from 'discord.js'
-import service from '../service/playerClassService.js'
+import { text } from '../service/text.js'
 
 export default {
   data: new SlashCommandBuilder()
-    .setName('klasse_entfernen')
+    .setName('class_remove')
     .setDescription('Entferne deine Klasse'),
   async execute(interaction) {
+    const guildId = interaction.guildId
     const row = new MessageActionRow().addComponents(
       new MessageButton()
         .setCustomId('confirm-button')
-        .setLabel('Ja')
+        .setLabel(text(guildId, 'yes'))
         .setStyle('DANGER')
     )
     await interaction.reply({
-      content: 'Bist du sicher?',
+      content: text(guildId, 'sure'),
       components: [row],
       ephemeral: true
     })
   },
   async executeButton(interaction) {
-    service.delete(interaction.guildId, interaction.user)
+    const guildId = interaction.guildId
+    service.delete(guildId, interaction.user)
     await interaction.update({
-      content:
-        'Deine Klasse wurde entfernt! \nDu kannst eine neue Klassen über "/klasse" hinzufügen',
+      content: text(guildId, 'classRemoved'),
       components: []
     })
   }

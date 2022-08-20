@@ -1,7 +1,8 @@
+import service from '../service/languageService.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { MessageActionRow, MessageButton, MessageSelectMenu } from 'discord.js'
 import { getDefaultOption, setDefaultOption } from './util/util.js'
-import service from '../service/languageService.js'
+import { textLang } from '../service/text.js'
 
 export default {
   data: new SlashCommandBuilder()
@@ -22,7 +23,9 @@ export default {
   },
   async executeSelect(interaction) {
     if (interaction.customId !== 'language-select')
-      throw new Error('Custom ID of interaction not recognized for slash command "/klasse"')
+      throw new Error(
+        'Custom ID of interaction not recognized for slash command "/klasse"'
+      )
     const languageSelectRow = interaction.message.components[0]
     setDefaultOption(languageSelectRow.components[0], interaction.values[0])
     const confirmButtonRow = new MessageActionRow().addComponents(
@@ -42,7 +45,9 @@ export default {
       getDefaultOption(interaction.message.components[0].components[0]).value
     )
     await interaction.update({
-      content: `The warchief's new language: \n${language.emoji} ${language.description}`,
+      content: `${textLang(language.locale, 'newLanguage')}: \n${
+        language.emoji
+      } ${language.description}`,
       components: []
     })
   }

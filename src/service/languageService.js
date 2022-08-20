@@ -1,5 +1,7 @@
-import { languages } from '../dataAccess/dataAccess.js'
-import dataAccessDiscordService from '../dataAccessDiscord/dataAccessDiscordService.js'
+import { languages, translations } from '../dataAccess/dataAccess.js'
+import { getGuildSettings } from '../dataAccessDiscord/dataAccessDiscordService.js'
+import { registerCommands } from '../commands/util/dynamicRegistrator.js'
+import raidTableService from './raidTableService.js'
 
 class LanguageService {
   #languageSelectOptions
@@ -9,33 +11,36 @@ class LanguageService {
   }
 
   getLanguageSelectOptions = guildId => {
-    const current = dataAccessDiscordService
-      .getDataAccessSettings(guildId).language
-    const currentSelectOption = this.#languageSelectOptions.find(_ => _.locale === current)
-    console.log(currentSelectOption)
-    const n = {...currentSelectOption, emoji: String.fromCodePoint("0x2705")}
-    console.log(n)
-    return [n,
-    ...this.#languageSelectOptions
-      .filter(_ => _.locale !== current)]
+    const locale = getGuildSettings(guildId).language
+    const currentSelectOption = this.#languageSelectOptions.find(
+      _ => _.locale === locale
+    )
+    const n = { ...currentSelectOption, emoji: String.fromCodePoint('0x2705') }
+    return [n, ...this.#languageSelectOptions.filter(_ => _.locale !== locale)]
   }
+
+  getLanguageLocale = guildId => getGuildSettings(guildId).language
+
+  get = (guildId, textKey) =>
+    translations[getGuildSettings(guildId).language][textKey]
 
   update = (guildId, languageId) => {
     const language = languages[languageId]
-    dataAccessDiscordService
-      .getDataAccessSettings(guildId)
-      .updateLanguage(language)
+    getGuildSettings(guildId).updateLanguage(language)
+    registerCommands(guildId, language)
+    raidTableService.updateTables(guildId)
     return language
   }
 
   #initLanguageSelectOptions = () => {
-    this.#languageSelectOptions =
-      Object.values(languages).map(_ => ({
+    this.#languageSelectOptions = Object.values(languages)
+      .map(_ => ({
         label: _.description,
         value: _.id.toString(),
         emoji: _.emoji,
         locale: _.locale
-      })).sort((a, b) => a.label.localeCompare(b.label))
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label))
   }
 }
 
