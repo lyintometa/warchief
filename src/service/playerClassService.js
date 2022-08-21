@@ -59,7 +59,10 @@ class PlayerClassService {
     }
   }
 
-  delete = (guildId, user) => getGuildPlayerData(guildId).delete(user)
+  delete = (guildId, user) => {
+    getGuildPlayerData(guildId).delete(user)
+    raidTableService.updateTables(guildId)
+  }
 
   #initClassSelectOptions = () =>
     Object.keys(languages).forEach(languageId => {
