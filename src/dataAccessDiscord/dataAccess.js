@@ -24,12 +24,15 @@ export default class DataAccess {
   }
 
   write = async data => {
-    await this.#messages
+    await this.#messages ///??
     const contents = this.#splitDataString(JSON.stringify(data))
     for (let i = 0; i < contents.length; i++) {
-      this.#messages[i]
-        ? this.#messages[i].edit(contents[i])
-        : this.#channel.send(contents[i])
+        if (this.#messages[i]){
+            this.#messages[i].edit(contents[i])
+            return
+        }
+        const message = await this.#channel.send(contents[i])
+        this.#messages.push(message)
     }
     const messagesToDelete = this.#messages.slice(contents.length)
     messagesToDelete.forEach(_ => {

@@ -8,9 +8,10 @@ import { textLang } from './text.js'
 
 class RaidTableService {
   createTable = (guildId, channelId) => {
-    if (getGuildSettings(guildId).tables[channelId]) return
+    const guildSettings = getGuildSettings(guildId)
+    if (guildSettings.tables[channelId]) return
     const playerData = getGuildPlayerData(guildId).playerData
-    return this.#constructTableEmbed(playerData).data
+    return this.#constructTableEmbed(guildSettings.language, playerData).data
   }
 
   updateTables = async guildId => {
