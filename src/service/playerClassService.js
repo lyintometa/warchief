@@ -48,9 +48,9 @@ class PlayerClassService {
     }
   }
 
-  createOrUpdateRole = (guildId, user, roleId) => {
+  createOrUpdateRole = async (guildId, user, roleId) => {
     const role = roles[roleId]
-    getGuildPlayerData(guildId).createOrUpdateRole(user, role)
+    await getGuildPlayerData(guildId).createOrUpdateRole(user, role)
     const locale = getGuildSettings(guildId).language
     raidTableService.updateTables(guildId)
     return {
@@ -59,8 +59,8 @@ class PlayerClassService {
     }
   }
 
-  delete = (guildId, user) => {
-    getGuildPlayerData(guildId).delete(user)
+  delete = async (guildId, user) => {
+    await getGuildPlayerData(guildId).delete(user)
     raidTableService.updateTables(guildId)
   }
 
