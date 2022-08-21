@@ -41,8 +41,16 @@ export default class SettingsAccess {
     await this.#dataAccess.write(this.#data)
   }
 
-  deleteTable = async channelId => {
-    delete this.#data.tables[channelId]
+  deleteTable = async message => {
+    if (this.#data.tables[message.channelId] !== message.id) return
+    delete this.#data.tables[message.channelId]
+    this.#messagesTable = this.#messagesTable.filter(_ => _.id !== message.id)
+    await this.#dataAccess.write(this.#data)
+  }
+
+  deleteTableChannel = async channel => {
+    delete this.#data.tables[channel.id]
+    this.#messagesTable = this.#messagesTable.filter(_ => _.channelId !== channel.id)
     await this.#dataAccess.write(this.#data)
   }
 

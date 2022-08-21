@@ -4,6 +4,7 @@ import dataAccessService from './dataAccessDiscord/dataAccessDiscordService.js'
 import { commands } from './dataAccess/dataAccess.js'
 import languageService from './service/languageService.js'
 import { clientCommands } from './commands/util/commandLoader.js'
+import raidTableService from './service/raidTableService.js'
 dotenv.config()
 
 const client = new Client({
@@ -24,10 +25,12 @@ client.on('guildDelete', async guild => {
   dataAccessService.deleteGuildData(guild)
 })
 
-client.on('messageDelete', function (message) {
-  const settings = dataAccessService.getSettings(message.guildId)
-  if (!settings) return
-  settings.deleteTable(message.channelId)
+client.on('messageDelete', message => {
+  raidTableService.deleteTable(message)
+})
+
+client.on('channelDelete', channel => {
+  raidTableService.deleteTableChannel(channel)
 })
 
 client.on('interactionCreate', async interaction => {

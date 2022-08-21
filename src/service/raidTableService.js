@@ -31,6 +31,11 @@ class RaidTableService {
   addTableMessage = async (guildId, message) =>
     getGuildSettings(guildId).addTableMessage(message)
 
+  deleteTable = async message =>
+    getGuildSettings(message.guildId).deleteTable(message)
+  deleteTableChannel = async channel =>
+    getGuildSettings(channel.guildId).deleteTableChannel(channel)
+
   #constructTableEmbed = (locale, playerData) =>
     new EmbedBuilder()
       .setColor(0x0099ff)

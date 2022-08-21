@@ -49,7 +49,6 @@ class PlayerClassService {
   }
 
   createOrUpdateRole = (guildId, user, roleId) => {
-    console.log(roleId)
     const role = roles[roleId]
     getGuildPlayerData(guildId).createOrUpdateRole(user, role)
     const locale = getGuildSettings(guildId).language
