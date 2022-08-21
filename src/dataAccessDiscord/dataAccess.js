@@ -96,7 +96,7 @@ export default class DataAccess {
           },
           {
             id: guild.roles.cache.find(role => role.name === 'Warchief'),
-            allow: ['SEND_MESSAGES', 'VIEW_CHANNEL', 'MANAGE_MESSAGES ']
+            allow: ['SEND_MESSAGES', 'VIEW_CHANNEL', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY']
           }
         ]
       })
