@@ -17,7 +17,7 @@ export default {
         .addOptions(service.getClassSelectOptions(guildId))
     )
     await interaction.reply({
-      content: text(guildId, 'classSelect'),
+      content: text(guildId, 'chooseClass'),
       components: [classSelectRow],
       ephemeral: true
     })
@@ -25,35 +25,63 @@ export default {
   async executeSelect(interaction) {
     const guildId = interaction.guildId
     const classSelectRow = interaction.message.components[0]
-    let specSelectRow = interaction.message.components[1]
+    let specOrRoleSelectRow = interaction.message.components[1]
+    let messageText
     switch (interaction.customId) {
       case 'class-select':
         setDefaultOption(classSelectRow.components[0], interaction.values[0])
-        specSelectRow = new MessageActionRow().addComponents(
+
+        messageText =
+          interaction.values[0] === '13'
+            ? text(guildId, 'chooseRole')
+            : text(guildId, 'chooseSpec')
+
+        const placeholder =
+          interaction.values[0] === '13'
+            ? text(guildId, 'role')
+            : text(guildId, 'spec')
+
+        const options =
+          interaction.values[0] === '13'
+            ? service.getRoleSelectOptions(guildId)
+            : service.getSpecSelectOptions(guildId, interaction.values[0])
+
+        specOrRoleSelectRow = new MessageActionRow().addComponents(
           new MessageSelectMenu()
-            .setCustomId('spec-select')
-            .setPlaceholder(text(guildId, 'spec'))
-            .addOptions(
-              service.getSpecSelectOptions(guildId, interaction.values[0])
-            )
+            .setCustomId('spec-role-select')
+            .setPlaceholder(placeholder)
+            .addOptions(options)
         )
+
         await interaction.update({
-          content: text(guildId, 'specSelect'),
-          components: [classSelectRow, specSelectRow]
+          content: messageText,
+          components: [classSelectRow, specOrRoleSelectRow]
         })
         return
 
-      case 'spec-select':
-        setDefaultOption(specSelectRow.components[0], interaction.values[0])
-        const confirmButtonRow = new MessageActionRow().addComponents(
+      case 'spec-role-select':
+        messageText =
+          getDefaultOption(classSelectRow.components[0]).value === '13'
+            ? text(guildId, 'confirmRole')
+            : text(guildId, 'confirmSpec')
+
+        setDefaultOption(
+          specOrRoleSelectRow.components[0],
+          interaction.values[0]
+        )
+        const confirmSpecButtonRow = new MessageActionRow().addComponents(
           new MessageButton()
             .setCustomId('confirm-button')
             .setLabel(text(guildId, 'confirm'))
             .setStyle('SUCCESS')
         )
         await interaction.update({
-          content: text(guildId, 'confirmSpec'),
-          components: [classSelectRow, specSelectRow, confirmButtonRow]
+          content: messageText,
+          components: [
+            classSelectRow,
+            specOrRoleSelectRow,
+            confirmSpecButtonRow
+          ]
         })
         return
 
@@ -66,15 +94,33 @@ export default {
   async executeButton(interaction) {
     const guildId = interaction.guildId
     const classSelectRow = interaction.message.components[0]
-    const specSelectRow = interaction.message.components[1]
+    const specOrRoleSelectRow = interaction.message.components[1]
     const playerClassId = getDefaultOption(classSelectRow.components[0]).value
-    const specializationId = getDefaultOption(specSelectRow.components[0]).value
-    const { playerClassDesc, playerClassEmoji, specDesc, specEmoji } =
+    const specOrRoleId = getDefaultOption(
+      specOrRoleSelectRow.components[0]
+    ).value
+
+    if (playerClassId === '13') {
+      let { roleDesc, roleEmoji } = service.createOrUpdateRole(
+        guildId,
+        interaction.user,
+        specOrRoleId
+      )
+      await interaction.update({
+        content: `${text(guildId, 'yourSelect')}:
+        \n${roleEmoji} ${roleDesc}
+              \n${text(guildId, 'canChange')}`,
+        components: []
+      })
+      return
+    }
+
+    let { playerClassDesc, playerClassEmoji, specDesc, specEmoji } =
       service.createOrUpdate(
         guildId,
         interaction.user,
         playerClassId,
-        specializationId
+        specOrRoleId
       )
     await interaction.update({
       content: `${text(guildId, 'yourSelect')}:

@@ -1,4 +1,9 @@
-import { specializations, roles, commands } from '../dataAccess/dataAccess.js'
+import {
+  specializations,
+  roles,
+  commands,
+  emojis
+} from '../dataAccess/dataAccess.js'
 import {
   getGuildSettings,
   getGuildPlayerData
@@ -43,9 +48,12 @@ class RaidTableService {
         .map(playerId => {
           const playerSpec =
             specializations[playerData[playerId].specialization]
-          const playerClass = playerSpec.playerClass
-          const playerRole = playerSpec.role
-          return `${playerRole.emoji} ${playerClass.emoji}${playerSpec.emoji} ${playerData[playerId].name}`
+          const playerClass = playerSpec?.playerClass
+          const playerRole =
+            playerSpec?.role || roles[playerData[playerId].role]
+          return `${playerRole.emoji} ${playerClass?.emoji || emojis[0]}${
+            playerSpec?.emoji || emojis[0]
+          } ${playerData[playerId].name}`
         }),
       '',
       `${roles[0].emoji} ${this.#countRole(playerData, 0)}  ${
@@ -56,26 +64,36 @@ class RaidTableService {
       ''
     ].join('\n')
 
-    #constructCommands = locale => ["class_select", "class_remove"].map(commandKey => 
-      "`" + commands[locale][commandKey].name + "`: " + commands[locale][commandKey].description 
-    ).join('\n')
+  #constructCommands = locale =>
+    ['class_select', 'class_remove']
+      .map(
+        commandKey =>
+          '`' +
+          commands[locale][commandKey].name +
+          '`: ' +
+          commands[locale][commandKey].description
+      )
+      .join('\n')
 
   #countRole = (playerData, roleId) =>
     Object.keys(playerData).filter(
       playerId =>
-        specializations[playerData[playerId].specialization].role.id === roleId
+        playerData[playerId].role === roleId ||
+        specializations[playerData[playerId].specialization]?.role.id === roleId
     ).length
 
   #byRole = playerData => (a, b) => {
     const playerSpecA = specializations[playerData[a].specialization]
     const playerSpecB = specializations[playerData[b].specialization]
-    const classA = playerSpecA.playerClass
-    const classB = playerSpecB.playerClass
-    const roleA = playerSpecA.role
-    const roleB = playerSpecB.role
-    if (roleA.displayIndex != roleB.displayIndex)
+    const classA = playerSpecA?.playerClass
+    const classB = playerSpecB?.playerClass
+    const roleA = playerSpecA?.role || roles[playerData[a].role]
+    const roleB = playerSpecB?.role || roles[playerData[b].role]
+    if (roleA.displayIndex !== roleB.displayIndex)
       return roleA.displayIndex - roleB.displayIndex
-    if (classA.id != classB.id) return classA.id - classB.id
+    if (!classA && classB) return 1
+    if (classA && !classB) return -1
+    if (classA.id !== classB.id) return classA.id - classB.id
     var playerNamesSorted = [playerData[a].name, playerData[b].name].sort()
     return (
       playerNamesSorted.indexOf(playerData[a].name) -

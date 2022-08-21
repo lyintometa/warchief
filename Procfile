@@ -1,2 +1,2 @@
-worker: node src/index.js -p $PORT
+worker: node src/index.js
 heroku ps:scale web=1

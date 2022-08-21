@@ -22,6 +22,15 @@ export default class PlayerAccess {
     if (!this.#data[user.id]) this.#data[user.id] = new PlayerEntity(user)
     this.#data[user.id].class = playerClass.id
     this.#data[user.id].specialization = playerSpec.id
+    delete this.#data[user.id].role
+    await this.#dataAccess.write(this.#data)
+  }
+
+  createOrUpdateRole = async (user, role) => {
+    if (!this.#data[user.id]) this.#data[user.id] = new PlayerEntity(user)
+    delete this.#data[user.id].class
+    delete this.#data[user.id].specialization
+    this.#data[user.id].role = role.id
     await this.#dataAccess.write(this.#data)
   }
 

@@ -102,5 +102,13 @@
       "en_GB": "Warrior",
       "de_DE": "Krieger"
     }
+  },
+  "13": {
+    "identifier": "Unknown",
+    "emoji": 0,
+    "description": {
+      "en_GB": "I don't know yet",
+      "de_DE": "Ich weiß es noch nicht"
+    }
   }
 }

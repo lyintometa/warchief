@@ -1,6 +1,7 @@
 import {
   languages,
   playerClasses,
+  roles,
   specializations
 } from '../dataAccess/dataAccess.js'
 import {
@@ -12,10 +13,12 @@ import raidTableService from './raidTableService.js'
 class PlayerClassService {
   #classSelectOptions = {}
   #specSelectOptions = {}
+  #roleSelectOptions = {}
 
   constructor() {
     this.#initClassSelectOptions()
     this.#initSpecSelectOptions()
+    this.#initRoleSelectOptions()
   }
 
   getClassSelectOptions = guildId =>
@@ -23,6 +26,9 @@ class PlayerClassService {
 
   getSpecSelectOptions = (guildId, classId) =>
     this.#specSelectOptions[getGuildSettings(guildId).language][classId]
+
+  getRoleSelectOptions = guildId =>
+    this.#roleSelectOptions[getGuildSettings(guildId).language]
 
   createOrUpdate = (guildId, user, playerClassId, specializationId) => {
     const playerClass = playerClasses[playerClassId]
@@ -39,6 +45,18 @@ class PlayerClassService {
       playerClassEmoji: playerClass.emoji,
       specDesc: specialization.description[locale],
       specEmoji: specialization.emoji
+    }
+  }
+
+  createOrUpdateRole = (guildId, user, roleId) => {
+    console.log(roleId)
+    const role = roles[roleId]
+    getGuildPlayerData(guildId).createOrUpdateRole(user, role)
+    const locale = getGuildSettings(guildId).language
+    raidTableService.updateTables(guildId)
+    return {
+      roleDesc: role.description[locale],
+      roleEmoji: role.emoji
     }
   }
 
@@ -69,6 +87,16 @@ class PlayerClassService {
             label: spec.description[locale] ?? 'undefined'
           }))
       })
+    })
+
+  #initRoleSelectOptions = () =>
+    Object.keys(languages).forEach(languageId => {
+      const locale = languages[languageId].locale
+      this.#roleSelectOptions[locale] = Object.values(roles).map(_ => ({
+        value: _.id.toString(),
+        emoji: _.emoji?.discordId,
+        label: _.description[locale] ?? 'undefined'
+      }))
     })
 }
 
