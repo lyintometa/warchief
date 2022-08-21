@@ -1,10 +1,11 @@
 import * as dotenv from 'dotenv'
 import { Client } from 'discord.js'
 import dataAccessService from './dataAccessDiscord/dataAccessDiscordService.js'
-import { commands } from './dataAccess/dataAccess.js'
+import { commands, languages } from './dataAccess/dataAccess.js'
 import languageService from './service/languageService.js'
 import { clientCommands } from './commands/util/commandLoader.js'
 import raidTableService from './service/raidTableService.js'
+import { registerCommands } from './commands/util/dynamicRegistrator.js'
 dotenv.config()
 
 const client = new Client({
@@ -19,6 +20,7 @@ client.once('ready', async () => {
 
 client.on('guildCreate', async guild => {
   await dataAccessService.creatGuildData(guild)
+  registerCommands(guild.id, languages[0])
 })
 
 client.on('guildDelete', async guild => {
