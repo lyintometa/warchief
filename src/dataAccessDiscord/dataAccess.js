@@ -92,7 +92,11 @@ export default class DataAccess {
         permissionOverwrites: [
           {
             id: guild.roles.everyone,
-            deny: ['SEND_MESSAGES']
+            deny: ['SEND_MESSAGES', 'VIEW_CHANNEL']
+          },
+          {
+            id: guild.roles.cache.find(role => role.name === 'Warchief'),
+            allow: ['SEND_MESSAGES', 'VIEW_CHANNEL']
           }
         ]
       })
