@@ -9,27 +9,22 @@ import Role, { RoleData } from '../models/Role.js'
 import Specialization, { SpecializationData } from '../models/Specialization.js'
 import ArrayUtils from '../utils/ArrayUtils.js'
 
-const commandDataFile = 'command.json'
 const emojiDataFile = 'emoji.json'
 const languageDataFile = 'language.json'
 const playerClassDataFile = 'player_class.json'
 const roleDataFile = 'role.json'
 const specializationDataFile = 'specialization.json'
-const translationDataFile = 'translation.json'
 
 const dataDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..', 'src/data')
 
 const readJsonFromFile = <T>(fileName: string) =>
   JSON.parse(fs.readFileSync(path.resolve(dataDirectory, fileName)).toString('utf-8')) as T
 
-const commands =
-  readJsonFromFile<Record<string, Record<string, { name: string; description: string }>>>(commandDataFile)
 const emojiData = readJsonFromFile<Record<string, EmojiData>>(emojiDataFile)
 const languageData = readJsonFromFile<Record<string, LanguageData>>(languageDataFile)
 const playerClassData = readJsonFromFile<Record<string, PlayerClassData>>(playerClassDataFile)
 const roleData = readJsonFromFile<Record<string, RoleData>>(roleDataFile)
 const specializationData = readJsonFromFile<Record<string, SpecializationData>>(specializationDataFile)
-const translations = readJsonFromFile<Record<string, Record<string, string>>>(translationDataFile)
 
 const languages = ArrayUtils.toRecord(
   Object.entries(languageData).map<Language>(([idString, entity]) => ({
@@ -76,4 +71,4 @@ Object.values(playerClasses).forEach(playerClass => {
   playerClass.specializations = Object.values(specializations).filter(spec => spec.playerClass.id === playerClass.id)
 })
 
-export { commands, emojis, languages, playerClasses, specializations, roles, translations }
+export { emojis, languages, playerClasses, specializations, roles }

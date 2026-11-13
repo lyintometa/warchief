@@ -1,4 +1,4 @@
-import { APISelectMenuOption, Snowflake, User } from 'discord.js'
+import { APISelectMenuOption, Guild, Snowflake, User } from 'discord.js'
 
 import { languages, playerClasses, roles, specializations } from '../dataAccess/dataAccess.js'
 import { getGuildSettings, getGuildPlayerData } from '../dataAccessDiscord/dataAccessDiscordService.js'
@@ -25,28 +25,28 @@ class PlayerClassService {
   getRoleSelectOptions = (guildId: Snowflake) => this.#roleSelectOptions[getGuildSettings(guildId).language]
 
   createOrUpdate = async (
-    guildId: Snowflake,
+    guild: Guild,
     user: User,
     playerClassId: number,
     specializationId: number,
   ): Promise<Specialization> => {
     const playerClass = playerClasses[playerClassId]
     const specialization = specializations[specializationId]
-    await getGuildPlayerData(guildId).createOrUpdate(user, playerClass, specialization)
-    raidTableService.updateTables(guildId)
+    await getGuildPlayerData(guild.id).createOrUpdate(user, playerClass, specialization)
+    raidTableService.updateTables(guild)
     return specialization
   }
 
-  createOrUpdateRole = async (guildId: Snowflake, user: User, roleId: number): Promise<Role> => {
+  createOrUpdateRole = async (guild: Guild, user: User, roleId: number): Promise<Role> => {
     const role = roles[roleId]
-    await getGuildPlayerData(guildId).createOrUpdateRole(user, role)
-    raidTableService.updateTables(guildId)
+    await getGuildPlayerData(guild.id).createOrUpdateRole(user, role)
+    raidTableService.updateTables(guild)
     return role
   }
 
-  delete = async (guildId: Snowflake, user: User) => {
-    await getGuildPlayerData(guildId).delete(user)
-    raidTableService.updateTables(guildId)
+  delete = async (guild: Guild, user: Pick<User, 'id'>) => {
+    await getGuildPlayerData(guild.id).delete(user)
+    raidTableService.updateTables(guild)
   }
 
   #initClassSelectOptions = () =>

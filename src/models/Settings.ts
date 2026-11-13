@@ -1,4 +1,6 @@
+import { Locale } from 'discord.js'
+
 export default interface Settings {
-  language: string
+  locale: Locale
   tables: Record<string, string>
 }

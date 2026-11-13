@@ -5,8 +5,8 @@
     "role": 0,
     "emoji": 17,
     "description": {
-      "en_GB": "Blood",
-      "de_DE": "Blut"
+      "en-GB": "Blood",
+      "de": "Blut"
     }
   },
   "1": {
@@ -15,8 +15,8 @@
     "role": 2,
     "emoji": 18,
     "description": {
-      "en_GB": "Frost",
-      "de_DE": "Frost"
+      "en-GB": "Frost",
+      "de": "Frost"
     }
   },
   "2": {
@@ -25,8 +25,8 @@
     "role": 2,
     "emoji": 19,
     "description": {
-      "en_GB": "Unholy",
-      "de_DE": "Unheilig"
+      "en-GB": "Unholy",
+      "de": "Unheilig"
     }
   },
   "3": {
@@ -35,8 +35,8 @@
     "role": 2,
     "emoji": 20,
     "description": {
-      "en_GB": "Havoc",
-      "de_DE": "Verwüstung"
+      "en-GB": "Havoc",
+      "de": "Verwüstung"
     }
   },
   "4": {
@@ -45,8 +45,8 @@
     "role": 0,
     "emoji": 21,
     "description": {
-      "en_GB": "Vengeance",
-      "de_DE": "Rachsucht"
+      "en-GB": "Vengeance",
+      "de": "Rachsucht"
     }
   },
   "5": {
@@ -55,8 +55,8 @@
     "role": 3,
     "emoji": 22,
     "description": {
-      "en_GB": "Balance",
-      "de_DE": "Gleichgewicht"
+      "en-GB": "Balance",
+      "de": "Gleichgewicht"
     }
   },
   "6": {
@@ -65,8 +65,8 @@
     "role": 2,
     "emoji": 23,
     "description": {
-      "en_GB": "Feral",
-      "de_DE": "Wildheit"
+      "en-GB": "Feral",
+      "de": "Wildheit"
     }
   },
   "7": {
@@ -75,8 +75,8 @@
     "role": 0,
     "emoji": 24,
     "description": {
-      "en_GB": "Guardian",
-      "de_DE": "Wächter"
+      "en-GB": "Guardian",
+      "de": "Wächter"
     }
   },
   "8": {
@@ -85,8 +85,8 @@
     "role": 1,
     "emoji": 25,
     "description": {
-      "en_GB": "Restoration",
-      "de_DE": "Wiederherstellung"
+      "en-GB": "Restoration",
+      "de": "Wiederherstellung"
     }
   },
   "9": {
@@ -95,8 +95,8 @@
     "role": 3,
     "emoji": 26,
     "description": {
-      "en_GB": "Devastation",
-      "de_DE": "Verheerung"
+      "en-GB": "Devastation",
+      "de": "Verheerung"
     }
   },
   "10": {
@@ -105,8 +105,8 @@
     "role": 1,
     "emoji": 27,
     "description": {
-      "en_GB": "Preservation",
-      "de_DE": "Bewahrung"
+      "en-GB": "Preservation",
+      "de": "Bewahrung"
     }
   },
   "11": {
@@ -115,8 +115,8 @@
     "role": 3,
     "emoji": 28,
     "description": {
-      "en_GB": "Beast Mastery",
-      "de_DE": "Tierherrschaft"
+      "en-GB": "Beast Mastery",
+      "de": "Tierherrschaft"
     }
   },
   "12": {
@@ -125,8 +125,8 @@
     "role": 3,
     "emoji": 29,
     "description": {
-      "en_GB": "Marksmanship",
-      "de_DE": "Treffsicherheit"
+      "en-GB": "Marksmanship",
+      "de": "Treffsicherheit"
     }
   },
   "13": {
@@ -135,8 +135,8 @@
     "role": 2,
     "emoji": 30,
     "description": {
-      "en_GB": "Survival",
-      "de_DE": "Überleben"
+      "en-GB": "Survival",
+      "de": "Überleben"
     }
   },
   "14": {
@@ -145,8 +145,8 @@
     "role": 3,
     "emoji": 31,
     "description": {
-      "en_GB": "Arcane",
-      "de_DE": "Arkan"
+      "en-GB": "Arcane",
+      "de": "Arkan"
     }
   },
   "15": {
@@ -155,8 +155,8 @@
     "role": 3,
     "emoji": 32,
     "description": {
-      "en_GB": "Fire",
-      "de_DE": "Feuer"
+      "en-GB": "Fire",
+      "de": "Feuer"
     }
   },
   "16": {
@@ -165,8 +165,8 @@
     "role": 3,
     "emoji": 33,
     "description": {
-      "en_GB": "Frost",
-      "de_DE": "Frost"
+      "en-GB": "Frost",
+      "de": "Frost"
     }
   },
   "17": {
@@ -175,8 +175,8 @@
     "role": 0,
     "emoji": 34,
     "description": {
-      "en_GB": "Brewmaster",
-      "de_DE": "Braumeister"
+      "en-GB": "Brewmaster",
+      "de": "Braumeister"
     }
   },
   "18": {
@@ -185,8 +185,8 @@
     "role": 1,
     "emoji": 35,
     "description": {
-      "en_GB": "Mistweaver",
-      "de_DE": "Nebelwirker"
+      "en-GB": "Mistweaver",
+      "de": "Nebelwirker"
     }
   },
   "19": {
@@ -195,8 +195,8 @@
     "role": 2,
     "emoji": 36,
     "description": {
-      "en_GB": "Windwalker",
-      "de_DE": "Windläufer"
+      "en-GB": "Windwalker",
+      "de": "Windläufer"
     }
   },
   "20": {
@@ -205,8 +205,8 @@
     "role": 1,
     "emoji": 37,
     "description": {
-      "en_GB": "Holy",
-      "de_DE": "Heilig"
+      "en-GB": "Holy",
+      "de": "Heilig"
     }
   },
   "21": {
@@ -215,8 +215,8 @@
     "role": 0,
     "emoji": 38,
     "description": {
-      "en_GB": "Protection",
-      "de_DE": "Schutz"
+      "en-GB": "Protection",
+      "de": "Schutz"
     }
   },
   "22": {
@@ -225,8 +225,8 @@
     "role": 2,
     "emoji": 39,
     "description": {
-      "en_GB": "Retribution",
-      "de_DE": "Vergeltung"
+      "en-GB": "Retribution",
+      "de": "Vergeltung"
     }
   },
   "23": {
@@ -235,8 +235,8 @@
     "role": 1,
     "emoji": 40,
     "description": {
-      "en_GB": "Discipline",
-      "de_DE": "Disziplin"
+      "en-GB": "Discipline",
+      "de": "Disziplin"
     }
   },
   "24": {
@@ -245,8 +245,8 @@
     "role": 1,
     "emoji": 41,
     "description": {
-      "en_GB": "Holy",
-      "de_DE": "Heilig"
+      "en-GB": "Holy",
+      "de": "Heilig"
     }
   },
   "25": {
@@ -255,8 +255,8 @@
     "role": 3,
     "emoji": 42,
     "description": {
-      "en_GB": "Shadow",
-      "de_DE": "Schatten"
+      "en-GB": "Shadow",
+      "de": "Schatten"
     }
   },
   "266": {
@@ -265,8 +265,8 @@
     "role": 2,
     "emoji": 43,
     "description": {
-      "en_GB": "Assassination",
-      "de_DE": "Meucheln"
+      "en-GB": "Assassination",
+      "de": "Meucheln"
     }
   },
   "27": {
@@ -275,8 +275,8 @@
     "role": 2,
     "emoji": 44,
     "description": {
-      "en_GB": "Outlaw",
-      "de_DE": "Gesetzlosigkeit"
+      "en-GB": "Outlaw",
+      "de": "Gesetzlosigkeit"
     }
   },
   "28": {
@@ -285,8 +285,8 @@
     "role": 2,
     "emoji": 45,
     "description": {
-      "en_GB": "Subtlety",
-      "de_DE": "Täuschung"
+      "en-GB": "Subtlety",
+      "de": "Täuschung"
     }
   },
   "29": {
@@ -295,8 +295,8 @@
     "role": 3,
     "emoji": 46,
     "description": {
-      "en_GB": "Elemental",
-      "de_DE": "Elementar"
+      "en-GB": "Elemental",
+      "de": "Elementar"
     }
   },
   "30": {
@@ -305,8 +305,8 @@
     "role": 2,
     "emoji": 47,
     "description": {
-      "en_GB": "Enhancement",
-      "de_DE": "Verstärkung"
+      "en-GB": "Enhancement",
+      "de": "Verstärkung"
     }
   },
   "31": {
@@ -315,8 +315,8 @@
     "role": 1,
     "emoji": 48,
     "description": {
-      "en_GB": "Restoration",
-      "de_DE": "Wiederherstellung"
+      "en-GB": "Restoration",
+      "de": "Wiederherstellung"
     }
   },
   "32": {
@@ -325,8 +325,8 @@
     "role": 3,
     "emoji": 49,
     "description": {
-      "en_GB": "Affliction",
-      "de_DE": "Gebrechen"
+      "en-GB": "Affliction",
+      "de": "Gebrechen"
     }
   },
   "33": {
@@ -335,8 +335,8 @@
     "role": 3,
     "emoji": 50,
     "description": {
-      "en_GB": "Demonology",
-      "de_DE": "Dämonologie"
+      "en-GB": "Demonology",
+      "de": "Dämonologie"
     }
   },
   "34": {
@@ -345,8 +345,8 @@
     "role": 3,
     "emoji": 51,
     "description": {
-      "en_GB": "Destruction",
-      "de_DE": "Zerstörung"
+      "en-GB": "Destruction",
+      "de": "Zerstörung"
     }
   },
   "35": {
@@ -355,8 +355,8 @@
     "role": 2,
     "emoji": 52,
     "description": {
-      "en_GB": "Arms",
-      "de_DE": "Waffen"
+      "en-GB": "Arms",
+      "de": "Waffen"
     }
   },
   "36": {
@@ -365,8 +365,8 @@
     "role": 2,
     "emoji": 53,
     "description": {
-      "en_GB": "Fury",
-      "de_DE": "Furor"
+      "en-GB": "Fury",
+      "de": "Furor"
     }
   },
   "37": {
@@ -375,8 +375,8 @@
     "role": 0,
     "emoji": 54,
     "description": {
-      "en_GB": "Protection",
-      "de_DE": "Schutz"
+      "en-GB": "Protection",
+      "de": "Schutz"
     }
   }
 }

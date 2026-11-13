@@ -1,29 +1,66 @@
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { MessageFlags } from 'discord.js'
+import {
+  ApplicationIntegrationType,
+  InteractionContextType,
+  Locale,
+  MessageFlags,
+  SlashCommandBuilder,
+} from 'discord.js'
 
-import { text } from '../i18n/text.js'
 import ClientCommand from '../models/ClientCommand.js'
-import languageService from '../service/languageService.js'
 import service from '../service/raidTableService.js'
+import { commonTexts, t } from '../utils/translationUtils.js'
+
+const texts = {
+  name: {
+    [Locale.EnglishGB]: 'create_table',
+    [Locale.German]: 'tabelle_erstellen',
+  },
+  description: {
+    [Locale.EnglishGB]: 'Create a table showing all raid members',
+    [Locale.German]: 'Erstelle eine Tabelle des Raidkaders',
+  },
+  'exists.content': {
+    [Locale.EnglishGB]: 'This channel already has a table',
+    [Locale.German]: 'Es gibt bereits eine Tabelle in diesem Kanal',
+  },
+}
 
 export default {
-  data: new SlashCommandBuilder().setName('raid_table').setDescription('Erstelle eine Tabelle des Raidkaders'),
-  async execute(interaction) {
-    const guildId = interaction.guildId
-    const locale = languageService.getGuildLanguage(guildId).locale
+  data: new SlashCommandBuilder()
+    .setName(texts.name[Locale.EnglishGB])
+    .setNameLocalizations(texts.name)
+    .setDescription(texts.description[Locale.EnglishGB])
+    .setDescriptionLocalizations(texts.description)
+    .setContexts(InteractionContextType.Guild)
+    .setIntegrationTypes(ApplicationIntegrationType.GuildInstall),
 
-    const table = service.createTable(guildId, interaction.channelId)
-    if (!table) {
+  async execute(interaction) {
+    const { channelId, locale } = interaction
+
+    if (!interaction.inCachedGuild()) {
+      // ToDo (Future): Figure out if cache can be filled instead
       await interaction.reply({
-        content: text(locale, 'tableExists'),
+        content: t(commonTexts, locale, 'command.onlyUsableInGuild'),
         flags: MessageFlags.Ephemeral,
       })
 
       return
     }
 
-    await interaction.reply({ embeds: [table] })
-    const message = await interaction.fetchReply()
-    service.addTableMessage(guildId, message)
+    const { guild } = interaction
+
+    const tableEmbed = await service.createTable(guild, channelId)
+
+    if (tableEmbed === undefined) {
+      await interaction.reply({
+        content: t(texts, locale, 'exists.content'),
+        flags: MessageFlags.Ephemeral,
+      })
+
+      return
+    }
+
+    const response = await interaction.reply({ embeds: [tableEmbed], withResponse: true })
+    service.addTableMessage(guild.id, response.resource!.message!)
   },
 } satisfies ClientCommand

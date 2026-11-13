@@ -1,16 +1,23 @@
-import { EmbedBuilder } from '@discordjs/builders'
-import type { Message, TextChannel } from 'discord.js'
+import { APIEmbed, EmbedBuilder, Guild, Locale, Message, SlashCommandBuilder, TextChannel } from 'discord.js'
 
-import { specializations, roles, commands, emojis } from '../dataAccess/dataAccess.js'
+import { clientCommands } from '../commands/util/commandLoader.js'
+import { specializations, roles, emojis } from '../dataAccess/dataAccess.js'
 import { getGuildSettings, getGuildPlayerData } from '../dataAccessDiscord/dataAccessDiscordService.js'
 import PlayerEntity from '../dataAccessDiscord/entities/PlayerEntity.js'
-import { text } from '../i18n/text.js'
+import { commonTexts, t } from '../utils/translationUtils.js'
+
+const texts = {
+  raidGroup: {
+    [Locale.EnglishGB]: 'Raid Group',
+    [Locale.German]: 'Raidkader',
+  },
+}
 
 type PlayerData = Record<string, PlayerEntity>
 
 interface GuildSettings {
   tables: Record<string, string>
-  language: string
+  language: Locale
   messagesTable: Message[]
   addTableMessage(message: Message): Promise<void>
   deleteTable(message: Message): Promise<void>
@@ -18,19 +25,19 @@ interface GuildSettings {
 }
 
 class RaidTableService {
-  createTable = (guildId: string, channelId: string): any => {
-    const guildSettings: GuildSettings = getGuildSettings(guildId)
-    if (guildSettings.tables[channelId]) return
-    const playerData = getGuildPlayerData(guildId).playerData
-    return this.#constructTableEmbed(guildSettings.language, playerData).data
+  createTable = async (guild: Guild, channelId: string): Promise<APIEmbed | undefined> => {
+    const guildSettings: GuildSettings = getGuildSettings(guild.id)
+    if (guildSettings.tables[channelId]) return undefined
+    const playerData = getGuildPlayerData(guild.id).playerData
+    const embed = await this.#constructTableEmbed(guild, guildSettings.language, playerData)
+    return embed.data
   }
 
-  updateTables = async (guildId: string): Promise<void> => {
-    const guildSettings: GuildSettings = getGuildSettings(guildId)
+  updateTables = async (guild: Guild): Promise<void> => {
+    const guildSettings: GuildSettings = getGuildSettings(guild.id)
     const messages: Message[] = guildSettings.messagesTable
-    const locale: string = guildSettings.language
-    const playerData: PlayerData = getGuildPlayerData(guildId).playerData
-    const tableEmbed: EmbedBuilder = this.#constructTableEmbed(locale, playerData)
+    const playerData: PlayerData = getGuildPlayerData(guild.id).playerData
+    const tableEmbed: EmbedBuilder = await this.#constructTableEmbed(guild, guildSettings.language, playerData)
     await Promise.all(messages.map(_ => _.edit({ embeds: [tableEmbed] })))
   }
 
@@ -41,18 +48,24 @@ class RaidTableService {
   deleteTableChannel = async (channel: TextChannel): Promise<void> =>
     getGuildSettings(channel.guildId).deleteTableChannel(channel)
 
-  #constructTableEmbed = (locale: string, playerData: Record<string, PlayerEntity>): EmbedBuilder =>
+  #constructTableEmbed = async (
+    guild: Guild,
+    locale: Locale,
+    playerData: Record<string, PlayerEntity>,
+  ): Promise<EmbedBuilder> =>
     new EmbedBuilder()
       .setColor(0x0099ff)
-      .setTitle(text(locale, 'raidGroup'))
-      .setDescription(this.#constructTable(playerData) + '\u200b' + '\u200b')
+      .setTitle(t(texts, locale, 'raidGroup'))
+      .setDescription((await this.#constructTable(guild, playerData)) + '\u200b' + '\u200b')
       .addFields({
-        name: text(locale, 'commands'),
-        value: this.#constructCommands(locale),
+        name: t(commonTexts, locale, 'command.name.plural'),
+        value: await this.#constructCommands(locale),
       })
 
-  #constructTable = (playerData: PlayerData): string =>
-    [
+  #constructTable = async (guild: Guild, playerData: PlayerData): Promise<string> => {
+    const guildMembers = await guild.members.fetch({ user: Object.keys(playerData) })
+
+    return [
       ...Object.keys(playerData)
         .sort(this.#byRole(playerData))
         .map((playerId: string) => {
@@ -61,26 +74,28 @@ class RaidTableService {
           const playerClass = playerSpec?.playerClass
           const roleId = playerData[playerId].role
           const playerRole = playerSpec?.role || (roleId !== undefined ? roles[roleId] : undefined)!
-          return `${playerRole.emoji} ${playerClass?.emoji || emojis[0]}${
-            playerSpec?.emoji || emojis[0]
-          } ${playerData[playerId].name}`
+          return `${playerRole.emoji} ${playerClass?.emoji || emojis[0]}${playerSpec?.emoji || emojis[0]} ${guildMembers.find(member => member.id === playerId)?.nickname ?? playerData[playerId].name}`
         }),
       '',
-      `${roles[0].emoji} ${this.#countRole(playerData, 0)}  ${
-        roles[1].emoji
-      } ${this.#countRole(playerData, 1)}  ${roles[2].emoji} ${
-        this.#countRole(playerData, 2) + this.#countRole(playerData, 3)
-      }`,
+      `${roles[0].emoji} ${this.#countRole(playerData, 0)}  ${roles[1].emoji} ${this.#countRole(playerData, 1)}  ${roles[2].emoji} ${this.#countRole(playerData, 2) + this.#countRole(playerData, 3)}`,
       '',
     ].join('\n')
+  }
 
-  #constructCommands = (locale: string): string =>
-    ['class_select', 'class_remove']
-      .map(
-        (commandKey: string) =>
-          '`' + commands[locale][commandKey].name + '`: ' + commands[locale][commandKey].description,
-      )
-      .join('\n')
+  #constructCommands = async (locale: Locale): Promise<string> => {
+    {
+      const commands = await clientCommands()
+
+      return ['class_select', 'class_remove']
+        .map(commandName => {
+          const command = commands.get(commandName)! as { data: SlashCommandBuilder }
+          const name = command.data.name_localizations?.[locale] ?? command.data.name
+          const description = command.data.description_localizations?.[locale] ?? command.data.description
+          return `\`/${name}\`: ${description}`
+        })
+        .join('\n')
+    }
+  }
 
   #countRole = (playerData: PlayerData, roleId: number): number =>
     Object.keys(playerData).filter(

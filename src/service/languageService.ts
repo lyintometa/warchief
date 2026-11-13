@@ -1,23 +1,19 @@
-import { Snowflake } from 'discord.js'
+import { Guild, Locale, Snowflake } from 'discord.js'
 
-import { registerCommands } from '../commands/util/dynamicRegistrator.js'
+//import { registerCommands } from '../commands/util/dynamicRegistrator.js'
 import { languages } from '../dataAccess/dataAccess.js'
 import { getGuildSettings } from '../dataAccessDiscord/dataAccessDiscordService.js'
-import Language from '../models/Language.js'
 import raidTableService from './raidTableService.js'
 
 class LanguageService {
-  getGuildLanguage = (guildId: Snowflake): Language => {
+  getGuildLocale = (guildId: Snowflake): Locale => {
     const guildLocale = getGuildSettings(guildId).language
-    return Object.values(languages).find(language => language.locale === guildLocale)!
+    return Object.values(languages).find(language => language.locale === guildLocale)?.locale ?? languages[0].locale
   }
 
-  setGuildLanguage = (guildId: Snowflake, languageId: number) => {
-    const language = languages[languageId]
-    getGuildSettings(guildId).updateLanguage(language)
-    registerCommands(guildId, language)
-    raidTableService.updateTables(guildId)
-    return language
+  setGuildLanguage = (guild: Guild, locale: Locale) => {
+    getGuildSettings(guild.id).updateLanguage(locale)
+    raidTableService.updateTables(guild)
   }
 }
 

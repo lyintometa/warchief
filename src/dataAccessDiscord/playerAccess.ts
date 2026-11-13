@@ -45,7 +45,7 @@ export default class PlayerAccess {
     await this.#dataAccess?.write(this.#data)
   }
 
-  delete = async (user: User) => {
+  delete = async (user: Pick<User, 'id'>) => {
     delete this.#data[user.id]
     await this.#dataAccess?.write(this.#data)
   }

@@ -1,7 +1,6 @@
-import { Channel, Guild, Message } from 'discord.js'
+import { Channel, Guild, Locale, Message } from 'discord.js'
 
 import { languages } from '../dataAccess/dataAccess.js'
-import Language from '../models/Language.js'
 import Settings from '../models/Settings.js'
 import DataAccess from './dataAccess.js'
 
@@ -9,12 +8,12 @@ const prefix = 'setting-data'
 
 export default class SettingsAccess {
   #dataAccess?: DataAccess
-  #data: Settings = { language: languages[0].locale, tables: {} }
+  #data: Settings = { locale: languages[0].locale, tables: {} }
   #messagesTable: Message[] = []
 
   init = async (guild: Guild) => {
     this.#dataAccess = new DataAccess(prefix)
-    this.#data = { language: languages[0].locale, tables: {} }
+    this.#data = { locale: languages[0].locale, tables: {} }
     const readSettings = await this.#dataAccess.read<Settings>(guild)
     if (readSettings !== undefined) this.#data = readSettings
     this.#messagesTable = await this.#aquireMessages(guild)
@@ -27,7 +26,7 @@ export default class SettingsAccess {
   }
 
   get language() {
-    return this.#data.language
+    return this.#data.locale
   }
 
   get messagesTable() {
@@ -40,8 +39,8 @@ export default class SettingsAccess {
     await this.#dataAccess?.write(this.#data)
   }
 
-  updateLanguage = async (language: Language) => {
-    this.#data.language = language.locale
+  updateLanguage = async (locale: Locale) => {
+    this.#data.locale = locale
     await this.#dataAccess?.write(this.#data)
   }
 
